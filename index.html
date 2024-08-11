@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=1440, maximum-scale=1.0">
+	<meta name="og:type" content="website">
+	<meta name="twitter:card" content="photo">
+	<script id="anima-load-script" src="load.js.txt"></script>
+	<script id="anima-hotspots-script" src="hotspots.js"></script>
+	<script id="anima-overrides-script" src="overrides.js"></script>
+	<script src="./js/timeline.js"></script>
+	<style>
+	@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+	
+	
+	
+	.screen textarea:focus,
+	.screen input:focus {
+	  outline: none;
+	}
+	
+	.screen * {
+	  -webkit-font-smoothing: antialiased;
+	  box-sizing: border-box;
+	}
+	
+	.screen div {
+	  -webkit-text-size-adjust: none;
+	}
+	
+	.component-wrapper a {
+	  display: contents;
+	  pointer-events: auto;
+	  text-decoration: none;
+	}
+	
+	.component-wrapper * {
+	  -webkit-font-smoothing: antialiased;
+	  box-sizing: border-box;
+	  pointer-events: none;
+	}
+	
+	.component-wrapper a *,
+	.component-wrapper input,
+	.component-wrapper video,
+	.component-wrapper iframe {
+	  pointer-events: auto;
+	}
+	
+	.component-wrapper.not-ready,
+	.component-wrapper.not-ready * {
+	  visibility: hidden !important;
+	}
+	
+	.screen a {
+	  display: contents;
+	  text-decoration: none;
+	}
+	
+	.full-width-a {
+	  width: 100%;
+	}
+	
+	.full-height-a {
+	  height: 100%;
+	}
+	
+	.container-center-vertical {
+	  align-items: center;
+	  display: flex;
+	  flex-direction: row;
+	  height: 100%;
+	  pointer-events: none;
+	}
+	
+	.container-center-vertical > * {
+	  flex-shrink: 0;
+	  pointer-events: auto;
+	}
+	
+	.container-center-horizontal {
+	  display: flex;
+	  flex-direction: row;
+	  justify-content: center;
+	  pointer-events: none;
+	  width: 100%;
+	}
+	
+	.container-center-horizontal > * {
+	  flex-shrink: 0;
+	  pointer-events: auto;
+	}
+	
+	.auto-animated div {
+	  --z-index: -1;
+	  opacity: 0;
+	  position: absolute;
+	}
+	
+	.auto-animated input {
+	  --z-index: -1;
+	  opacity: 0;
+	  position: absolute;
+	}
+	
+	.auto-animated .container-center-vertical,
+	.auto-animated .container-center-horizontal {
+	  opacity: 1;
+	}
+	
+	.overlay-base {
+	  display: none;
+	  height: 100%;
+	  opacity: 0;
+	  position: fixed;
+	  top: 0;
+	  width: 100%;
+	}
+	
+	.overlay-base.animate-appear {
+	  align-items: center;
+	  animation: reveal 0.3s ease-in-out 1 normal forwards;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	  opacity: 0;
+	}
+	
+	.overlay-base.animate-disappear {
+	  animation: reveal 0.3s ease-in-out 1 reverse forwards;
+	  display: block;
+	  opacity: 1;
+	  pointer-events: none;
+	}
+	
+	.overlay-base.animate-disappear * {
+	  pointer-events: none;
+	}
+	
+	@keyframes reveal {
+	  from { opacity: 0 }
+	 to { opacity: 1 }
+	}
+	
+	.animate-nodelay {
+	  animation-delay: 0s;
+	}
+	
+	.align-self-flex-start {
+	  align-self: flex-start;
+	}
+	
+	.align-self-flex-end {
+	  align-self: flex-end;
+	}
+	
+	.align-self-flex-center {
+	  align-self: flex-center;
+	}
+	
+	.valign-text-middle {
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	}
+	
+	.valign-text-bottom {
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: flex-end;
+	}
+	
+	input:focus {
+	  outline: none;
+	}
+	
+	.listeners-active,
+	.listeners-active * {
+	  pointer-events: auto;
+	}
+	
+	.hidden,
+	.hidden * {
+	  pointer-events: none;
+	  visibility: hidden;
+	}
+	
+	.smart-layers-pointers,
+	.smart-layers-pointers * {
+	  pointer-events: auto;
+	  visibility: visible;
+	}
+	
+	.listeners-active-click,
+	.listeners-active-click * {
+	  cursor: pointer;
+	}
+	
+	* {
+	  box-sizing: border-box;
+	}
+	:root { 
+	  --black: #000000;
+	  --desert-storm: #f8f8f8;
+	  --river-bed: #45525b;
+	  --tuatara: #353732;
+	  --white: #ffffff;
+	 
+	  --font-size-l: 16px;
+	  --font-size-m: 14px;
+	  --font-size-s: 12px;
+	  --font-size-xl: 17px;
+	  --font-size-xs: 11px;
+	  --font-size-xxl: 18px;
+	  --font-size-xxxl: 25px;
+	 
+	  --font-family-poppins: "Poppins", Helvetica;
+	  --font-family-roboto: "Roboto", Helvetica;
+	}
+	.poppins-normal-tuatara-12px {
+	  color: var(--tuatara);
+	  font-family: var(--font-family-poppins);
+	  font-size: var(--font-size-s);
+	  font-style: normal;
+	  font-weight: 400;
+	}
+	
+	.roboto-normal-river-bed-11px {
+	  color: var(--river-bed);
+	  font-family: var(--font-family-roboto);
+	  font-size: var(--font-size-xs);
+	  font-style: normal;
+	  font-weight: 400;
+	}
+	
+	.roboto-normal-river-bed-18px {
+	  color: var(--river-bed);
+	  font-family: var(--font-family-roboto);
+	  font-size: var(--font-size-xxl);
+	  font-style: normal;
+	  font-weight: 400;
+	}
+	
+	:root {
+	}
+	
+	
+	/* screen - desktop */
+	
+	.desktop {
+	  background-color: var(--white);
+	  height: 1830px;
+	  overflow: hidden;
+	  overflow-x: hidden;
+	  position: relative;
+	  width: 1440px;
+	}
+	
+	.desktop .frame-dg6U5x {
+	  background-color: transparent;
+	  height: 80px;
+	  left: 0px;
+	  position: absolute;
+	  top: 0px;
+	  width: 1440px;
+	}
+	
+	.desktop .rectangle-OxQvKu {
+	  background-color: var(--white);
+	  height: 80px;
+	  width: 1440px;
+	}
+	
+	.desktop .frame-OxQvKu {
+	  background-color: transparent;
+	  height: 40px;
+	  left: 120px;
+	  position: absolute;
+	  top: 20px;
+	  width: 1200px;
+	}
+	
+	.desktop .image-EQHWEP {
+	  height: 40px;
+	  left: 16px;
+	  width: 78px;
+	}
+	
+	.desktop .frame-EQHWEP {
+	  background-color: transparent;
+	  height: 40px;
+	  left: 963px;
+	  position: absolute;
+	  top: 0px;
+	  width: 221px;
+	}
+	
+	.desktop .frame-zLMriT {
+	  background-color: transparent;
+	  height: 36px;
+	  left: 161px;
+	  position: absolute;
+	  top: 2px;
+	  width: 60px;
+	}
+	
+	.desktop .about-t9LxEh {
+	  background-color: transparent;
+	  color: var(--tuatara);
+	  font-family: var(--font-family-roboto);
+	  font-size: var(--font-size-m);
+	  font-style: normal;
+	  font-weight: 400;
+	  height: auto;
+	  left: 10px;
+	  letter-spacing: 0.00px;
+	  line-height: 16px;
+	  position: absolute;
+	  text-align: left;
+	  top: 8px;
+	  width: 40px;
+	}
+	
+	.desktop .home-zLMriT {
+	  background-color: transparent;
+	  color: var(--tuatara);
+	  font-family: var(--font-family-roboto);
+	  font-size: var(--font-size-m);
+	  font-style: normal;
+	  font-weight: 400;
+	  height: auto;
+	  left: 20px;
+	  letter-spacing: 0.00px;
+	  line-height: 16px;
+	  position: absolute;
+	  text-align: left;
+	  top: 10px;
+	  width: 39px;
+	}
+	
+	.desktop .frame-a1q5If {
+	  background-color: transparent;
+	  height: 36px;
+	  left: 79px;
+	  position: absolute;
+	  top: 2px;
+	  width: 72px;
+	}
+	
+	.desktop .archive-OVaPHY {
+	  background-color: transparent;
+	  color: var(--tuatara);
+	  font-family: var(--font-family-roboto);
+	  font-size: 15px;
+	  font-style: normal;
+	  font-weight: 400;
+	  height: auto;
+	  left: 10px;
+	  letter-spacing: 0.00px;
+	  line-height: 16px;
+	  position: absolute;
+	  text-align: left;
+	  top: 8px;
+	  width: 52px;
+	}
+	
+	.desktop .frame-97rk2x {
+	  background-color: transparent;
+	  height: 148px;
+	  left: 320px;
+	  position: absolute;
+	  top: 180px;
+	  width: 800px;
+	}
+	
+	.desktop .image-CMg9c5 {
+	  height: 48px;
+	  left: 16px;
+	  width: 94px;
+	}
+	
+	.desktop .frame-CMg9c5 {
+	  background-color: transparent;
+	  height: 80px;
+	  left: 16px;
+	  position: absolute;
+	  top: 68px;
+	  width: 768px;
+	}
+	
+	.desktop .frame-xqGrIx {
+	  background-color: transparent;
+	  height: 45px;
+	  left: 0px;
+	  position: relative;
+	  top: -3px;
+	  width: 288px;
+	}
+	
+	.desktop .welcome-to-calm-a-li-9hJjrx {
+	  background-color: transparent;
+	  height: 83px;
+	  left: -3px;
+	  position: absolute;
+	  top: 5px;
+	  width: 662px;
+	}
+	
+	.desktop .frame-t9gg9N {
+	  background-color: transparent;
+	  height: 1392px;
+	  left: 0px;
+	  position: absolute;
+	  top: 438px;
+	  width: 1440px;
+	}
+	
+	.desktop .rectangle-2KmCTY {
+	  background-color: #fafafa;
+	  height: 1392px;
+	  width: 1440px;
+	}
+	
+	.desktop .frame-2KmCTY {
+	  background-color: transparent;
+	  height: 1192px;
+	  left: 336px;
+	  position: absolute;
+	  top: 100px;
+	  width: 768px;
+	}
+	
+	.desktop .frame-DHMNTA {
+	  background-color: transparent;
+	  height: 553px;
+	  left: 0px;
+	  overflow: hidden;
+	  position: absolute;
+	  top: 5px;
+	  width: 507px;
+	}
+	
+	.desktop .rectangle-MxkBTE {
+	  background-color: var(--white);
+	  border: 1px solid;
+	  border-color: var(--desert-storm);
+	  border-radius: 10px;
+	  box-shadow: 0px 3px 15px #00000008;
+	  height: 553px;
+	  width: 507px;
+	}
+	
+	.desktop .frame-MxkBTE {
+	  background-color: transparent;
+	  height: 551px;
+	  left: 1px;
+	  position: absolute;
+	  top: 1px;
+	  width: 505px;
+	}
+	
+	.desktop .frame-BuEu5Z {
+	  background-color: transparent;
+	  height: 161px;
+	  left: 0px;
+	  position: absolute;
+	  top: 284px;
+	  width: 505px;
+	}
+	
+	.desktop .rectangle-Z3YHLI {
+	  background-color: var(--white);
+	  height: 161px;
+	  width: 505px;
+	}
+	
+	.desktop .frame-Z3YHLI {
+	  background-color: transparent;
+	  height: 66px;
+	  left: 20px;
+	  position: absolute;
+	  top: 85px;
+	  width: 465px;
+	}
+	
+	.desktop .delectus-sint-nisi-u-5yWgPw {
+	  background-color: transparent;
+	  color: var(--river-bed);
+	  font-family: var(--font-family-roboto);
+	  font-size: var(--font-size-m);
+	  font-style: normal;
+	  font-weight: 400;
+	  height: auto;
+	  left: 0px;
+	  letter-spacing: 0.00px;
+	  line-height: 22.4px;
+	  position: absolute;
+	  text-align: left;
+	  top: 1px;
+	  width: 462px;
+	}
+	
+	.desktop .title-Z3YHLI {
+	  background-color: transparent;
+	  color: var(--river-bed);
+	  font-family: var(--font-family-roboto);
+	  font-size: var(--font-size-xxxl);
+	  font-style: normal;
+	  font-weight: 400;
+	  height: auto;
+	  left: 20px;
+	  letter-spacing: 0.00px;
+	  line-height: 33.6px;
+	  position: absolute;
+	  text-align: left;
+	  top: 40px;
+	  width: 255px;
+	}
+	
+	.desktop .frame-yAaqho {
+	  background-color: transparent;
+	  height: 12px;
+	  left: 20px;
+	  position: absolute;
+	  top: 20px;
+	  width: 59px;
+	}
+	
+	.desktop .travel-qHxkM6 {
+	  background-color: transparent;
+	  height: auto;
+	  left: 0px;
+	  letter-spacing: 2.00px;
+	  line-height: 12px;
+	  position: absolute;
+	  text-align: left;
+	  top: -4px;
+	  width: 59px;
+	}
+	
+	.desktop .november-24-2021-BuEu5Z {
+	  top: 503px;
+	}
+	
+	.desktop .image-BuEu5Z {
+	  height: 284px;
+	  left: 0px;
+	  object-fit: cover;
+	  width: 505px;
+	}
+	
+	.desktop .frame-1yJcJ0 {
+	  background-color: transparent;
+	  height: 258px;
+	  left: 523px;
+	  overflow: hidden;
+	  position: absolute;
+	  top: 5px;
+	  width: 245px;
+	}
+	
+	.desktop .rectangle-K45B8I {
+	  background-color: var(--white);
+	  border: 1px solid;
+	  border-color: var(--desert-storm);
+	  border-radius: 10px;
+	  box-shadow: 0px 3px 15px #00000008;
+	  height: 258px;
+	  width: 245px;
+	}
+	
+	.desktop .frame-K45B8I {
+	  background-color: transparent;
+	  height: 256px;
+	  left: 1px;
+	  position: absolute;
+	  top: 1px;
+	  width: 243px;
+	}
+	
+	.desktop .image-DS4ZjH {
+	  height: 137px;
+	  left: 0px;
+	  object-fit: cover;
+	  width: 243px;
+	}
+	
+	.desktop .november-24-2021-DS4ZjH {
+	  top: 208px;
+	}
+	
+	.desktop .frame-DS4ZjH {
+	  background-color: transparent;
+	  height: 73px;
+	  left: 0px;
+	  position: absolute;
+	  top: 137px;
+	  width: 243px;
+	}
+	
+	.desktop .rectangle-cBXA0q {
+	  background-color: var(--white);
+	  height: 73px;
+	  width: 243px;
+	}
+	
+	.desktop .frame-cBXA0q {
+	  background-color: transparent;
+	  height: 12px;
+	  left: 20px;
+	  position: absolute;
+	  top: 20px;
+	  width: 75px;
+	}
+	
+	.desktop .exercise-G2xfIc {
+	  background-color: transparent;
+	  height: auto;
+	  left: 0px;
+	  letter-spacing: 2.00px;
+	  line-height: 12px;
+	  position: absolute;
+	  text-align: left;
+	  top: -4px;
+	  width: 75px;
+	}
+	
+	.desktop .climbing-as-exercise-cBXA0q {
+	  background-color: transparent;
+	  color: var(--river-bed);
+	  font-family: var(--font-family-roboto);
+	  font-size: var(--font-size-l);
+	  font-style: normal;
+	  font-weight: 400;
+	  height: auto;
+	  left: 20px;
+	  letter-spacing: 0.00px;
+	  line-height: 21.6px;
+	  position: absolute;
+	  text-align: left;
+	  top: 40px;
+	  width: 151px;
+	}
+	
+	.desktop .frame-60oISG {
+	  background-color: transparent;
+	  height: 279px;
+	  left: 523px;
+	  overflow: hidden;
+	  position: absolute;
+	  top: 279px;
+	  width: 245px;
+	}
+	
+	.desktop .rectangle-CU13ze {
+	  background-color: var(--white);
+	  border: 1px solid;
+	  border-color: var(--desert-storm);
+	  border-radius: 10px;
+	  box-shadow: 0px 3px 15px #00000008;
+	  height: 279px;
+	  width: 245px;
+	}
+	
+	.desktop .frame-CU13ze {
+	  background-color: transparent;
+	  height: 277px;
+	  left: 1px;
+	  position: absolute;
+	  top: 1px;
+	  width: 243px;
+	}
+	
+	.desktop .image-BSyk5O {
+	  height: 137px;
+	  left: 0px;
+	  object-fit: cover;
+	  width: 243px;
+	}
+	
+	.desktop .november-24-2021-BSyk5O {
+	  top: 229px;
+	}
+	
+	.desktop .frame-BSyk5O {
+	  background-color: transparent;
+	  height: 94px;
+	  left: 0px;
+	  position: absolute;
+	  top: 137px;
+	  width: 243px;
+	}
+	
+	.desktop .rectangle-hjewc1 {
+	  background-color: var(--white);
+	  height: 94px;
+	  width: 243px;
+	}
+	
+	.desktop .frame-hjewc1 {
+	  background-color: transparent;
+	  height: 12px;
+	  left: 20px;
+	  position: absolute;
+	  top: 20px;
+	  width: 42px;
+	}
+	
+	.desktop .the-move-to-mirrorless-cameras-hjewc1 {
+	  background-color: transparent;
+	  height: auto;
+	  left: 20px;
+	  letter-spacing: 0.00px;
+	  line-height: 21.6px;
+	  position: absolute;
+	  text-align: left;
+	  top: 41px;
+	  width: 168px;
+	}
+	
+	.desktop .frame-JsPz2k {
+	  background-color: transparent;
+	  height: 334px;
+	  left: 0px;
+	  overflow: hidden;
+	  position: absolute;
+	  top: 574px;
+	  width: 376px;
+	}
+	
+	.desktop .rectangle-8HOb9T {
+	  background-color: var(--white);
+	  border: 1px solid;
+	  border-color: var(--desert-storm);
+	  border-radius: 10px;
+	  box-shadow: 0px 3px 15px #00000008;
+	  height: 334px;
+	  width: 376px;
+	}
+	
+	.desktop .frame-8HOb9T {
+	  background-color: transparent;
+	  height: 332px;
+	  left: 1px;
+	  position: absolute;
+	  top: 1px;
+	  width: 374px;
+	}
+	
+	.desktop .image-lNuYoy {
+	  height: 218px;
+	  left: -1px;
+	  object-fit: cover;
+	  width: 376px;
+	}
+	
+	.desktop .november-24-2021-lNuYoy {
+	  top: 285px;
+	}
+	
+	.desktop .frame-lNuYoy {
+	  background-color: transparent;
+	  height: 76px;
+	  left: 0px;
+	  position: absolute;
+	  top: 210px;
+	  width: 374px;
+	}
+	
+	.desktop .rectangle-L10UZB {
+	  background-color: var(--white);
+	  height: 76px;
+	  width: 374px;
+	}
+	
+	.desktop .frame-L10UZB {
+	  background-color: transparent;
+	  height: 12px;
+	  left: 20px;
+	  position: absolute;
+	  top: 20px;
+	  width: 42px;
+	}
+	
+	.desktop .drone-photography-on-a-space-budget-L10UZB {
+	  background-color: transparent;
+	  color: var(--river-bed);
+	  font-family: var(--font-family-roboto);
+	  font-size: var(--font-size-xl);
+	  font-style: normal;
+	  font-weight: 400;
+	  height: auto;
+	  left: 20px;
+	  letter-spacing: 0.00px;
+	  line-height: 24px;
+	  position: absolute;
+	  text-align: left;
+	  top: 41px;
+	  width: 304px;
+	}
+	
+	.desktop .frame-u68RmY {
+	  background-color: transparent;
+	  height: 334px;
+	  left: 392px;
+	  overflow: hidden;
+	  position: absolute;
+	  top: 574px;
+	  width: 376px;
+	}
+	
+	.desktop .rectangle-jr5Abb {
+	  background-color: var(--white);
+	  border: 1px solid;
+	  border-color: var(--desert-storm);
+	  border-radius: 10px;
+	  box-shadow: 0px 3px 15px #00000008;
+	  height: 334px;
+	  width: 376px;
+	}
+	
+	.desktop .frame-jr5Abb {
+	  background-color: transparent;
+	  height: 332px;
+	  left: 1px;
+	  position: absolute;
+	  top: 1px;
+	  width: 374px;
+	}
+	
+	.desktop .image-xX7lyb {
+	  height: 210px;
+	  left: 0px;
+	  object-fit: cover;
+	  width: 374px;
+	}
+	
+	.desktop .november-24-2021-xX7lyb {
+	  top: 285px;
+	}
+	
+	.desktop .frame-xX7lyb {
+	  background-color: transparent;
+	  height: 76px;
+	  left: 0px;
+	  position: absolute;
+	  top: 210px;
+	  width: 374px;
+	}
+	
+	.desktop .rectangle-Zx9kzI {
+	  background-color: var(--white);
+	  height: 76px;
+	  width: 374px;
+	}
+	
+	.desktop .frame-Zx9kzI {
+	  background-color: transparent;
+	  height: 12px;
+	  left: 20px;
+	  position: absolute;
+	  top: 20px;
+	  width: 78px;
+	}
+	
+	.desktop .tutorial-6IxzmH {
+	  background-color: transparent;
+	  height: auto;
+	  left: 0px;
+	  letter-spacing: 2.00px;
+	  line-height: 12px;
+	  position: absolute;
+	  text-align: left;
+	  top: -4px;
+	  width: 78px;
+	}
+	
+	.desktop .how-to-make-the-perfect-cup-of-coffee-Zx9kzI {
+	  background-color: transparent;
+	  height: auto;
+	  left: 20px;
+	  letter-spacing: 0.00px;
+	  line-height: 24px;
+	  position: absolute;
+	  text-align: left;
+	  top: 41px;
+	  width: 308px;
+	}
+	
+	.desktop .frame-qBnz5L {
+	  background-color: transparent;
+	  height: 273px;
+	  left: 0px;
+	  overflow: hidden;
+	  position: absolute;
+	  top: 924px;
+	  width: 245px;
+	}
+	
+	.desktop .rectangle-Si5S5H {
+	  background-color: var(--white);
+	  border: 1px solid;
+	  border-color: var(--desert-storm);
+	  border-radius: 10px;
+	  box-shadow: 0px 3px 15px #00000008;
+	  height: 273px;
+	  width: 245px;
+	}
+	
+	.desktop .frame-Si5S5H {
+	  background-color: transparent;
+	  height: 271px;
+	  left: 1px;
+	  position: absolute;
+	  top: 1px;
+	  width: 243px;
+	}
+	
+	.desktop .image-uI55PZ {
+	  height: 137px;
+	  left: 0px;
+	  object-fit: cover;
+	  width: 243px;
+	}
+	
+	.desktop .frame-uI55PZ {
+	  background-color: transparent;
+	  height: 67px;
+	  left: 0px;
+	  position: absolute;
+	  top: 137px;
+	  width: 243px;
+	}
+	
+	.desktop .rectangle-ClupXb {
+	  background-color: var(--white);
+	  height: 67px;
+	  width: 243px;
+	}
+	
+	.desktop .frame-ClupXb {
+	  background-color: transparent;
+	  height: 12px;
+	  left: 20px;
+	  position: absolute;
+	  top: 20px;
+	  width: 59px;
+	}
+	
+	.desktop .the-best-pen-ive-ever-used-ClupXb {
+	  background-color: transparent;
+	  color: var(--river-bed);
+	  font-family: var(--font-family-roboto);
+	  font-size: var(--font-size-l);
+	  font-style: normal;
+	  font-weight: 400;
+	  height: auto;
+	  left: 20px;
+	  letter-spacing: 0.00px;
+	  line-height: 21.6px;
+	  position: absolute;
+	  text-align: left;
+	  top: 34px;
+	  width: 196px;
+	}
+	
+	.desktop .november-24-2021-uI55PZ {
+	  top: 223px;
+	}
+	
+	.desktop .frame-tT1jXK {
+	  background-color: transparent;
+	  height: 273px;
+	  left: 261px;
+	  overflow: hidden;
+	  position: absolute;
+	  top: 924px;
+	  width: 245px;
+	}
+	
+	.desktop .rectangle-igC8gL {
+	  background-color: var(--white);
+	  border: 1px solid;
+	  border-color: var(--desert-storm);
+	  border-radius: 10px;
+	  box-shadow: 0px 3px 15px #00000008;
+	  height: 273px;
+	  width: 245px;
+	}
+	
+	.desktop .frame-igC8gL {
+	  background-color: transparent;
+	  height: 271px;
+	  left: 1px;
+	  position: absolute;
+	  top: 1px;
+	  width: 243px;
+	}
+	
+	.desktop .image-Enyxxq {
+	  height: 137px;
+	  left: -0px;
+	  object-fit: cover;
+	  width: 243px;
+	}
+	
+	.desktop .november-24-2021-Enyxxq {
+	  top: 223px;
+	}
+	
+	.desktop .frame-Enyxxq {
+	  background-color: transparent;
+	  height: 88px;
+	  left: -0px;
+	  position: absolute;
+	  top: 137px;
+	  width: 243px;
+	}
+	
+	.desktop .rectangle-6jk6KK {
+	  background-color: var(--white);
+	  height: 88px;
+	  width: 243px;
+	}
+	
+	.desktop .frame-6jk6KK {
+	  background-color: transparent;
+	  height: 12px;
+	  left: 20px;
+	  position: absolute;
+	  top: 20px;
+	  width: 59px;
+	}
+	
+	.desktop .tech-focused-travel-backpack-6jk6KK {
+	  background-color: transparent;
+	  height: auto;
+	  left: 20px;
+	  letter-spacing: 0.00px;
+	  line-height: 21.6px;
+	  position: absolute;
+	  text-align: left;
+	  top: 35px;
+	  width: 142px;
+	}
+	
+	.desktop .frame-iykY6D {
+	  background-color: transparent;
+	  height: 273px;
+	  left: 523px;
+	  overflow: hidden;
+	  position: absolute;
+	  top: 924px;
+	  width: 245px;
+	}
+	
+	.desktop .rectangle-FdkJyR {
+	  background-color: var(--white);
+	  border: 1px solid;
+	  border-color: var(--desert-storm);
+	  border-radius: 10px;
+	  box-shadow: 0px 3px 15px #00000008;
+	  height: 273px;
+	  width: 245px;
+	}
+	
+	.desktop .frame-FdkJyR {
+	  background-color: transparent;
+	  height: 271px;
+	  left: 1px;
+	  position: absolute;
+	  top: 1px;
+	  width: 243px;
+	}
+	
+	.desktop .image-jaPziB {
+	  height: 137px;
+	  left: 0px;
+	  object-fit: cover;
+	  width: 243px;
+	}
+	
+	.desktop .november-24-2021-jaPziB {
+	  top: 223px;
+	}
+	
+	.desktop .frame-jaPziB {
+	  background-color: transparent;
+	  height: 88px;
+	  left: 0px;
+	  position: absolute;
+	  top: 137px;
+	  width: 243px;
+	}
+	
+	.desktop .rectangle-GP6YZ3 {
+	  background-color: var(--white);
+	  height: 88px;
+	  width: 243px;
+	}
+	
+	.desktop .frame-GP6YZ3 {
+	  background-color: transparent;
+	  height: 12px;
+	  left: 20px;
+	  position: absolute;
+	  top: 20px;
+	  width: 59px;
+	}
+	
+	.desktop .desk-accessories-to-keep-you-organized-GP6YZ3 {
+	  background-color: transparent;
+	  height: auto;
+	  left: 20px;
+	  letter-spacing: 0.00px;
+	  line-height: 21.6px;
+	  position: absolute;
+	  text-align: left;
+	  top: 35px;
+	  width: 179px;
+	}
+	
+	.desktop .image {
+	  background-color: transparent;
+	  position: absolute;
+	  top: 0px;
+	}
+	
+	.desktop .november-24-2021 {
+	  background-color: transparent;
+	  height: auto;
+	  left: 20px;
+	  letter-spacing: 0.00px;
+	  line-height: 16.8px;
+	  position: absolute;
+	  text-align: left;
+	  width: 96px;
+	}
+	
+	.desktop .rectangle {
+	  left: 0px;
+	  position: absolute;
+	  top: 0px;
+	}
+	
+	.desktop .review {
+	  background-color: transparent;
+	  height: auto;
+	  left: 0px;
+	  letter-spacing: 2.00px;
+	  line-height: 12px;
+	  position: absolute;
+	  text-align: left;
+	  top: -4px;
+	  width: 59px;
+	}
+	
+	.desktop .tech {
+	  background-color: transparent;
+	  height: auto;
+	  left: 0px;
+	  letter-spacing: 2.00px;
+	  line-height: 12px;
+	  position: absolute;
+	  text-align: left;
+	  top: -4px;
+	  width: 42px;
+	}
+	</style>
+</head>
+
+<body style="margin: 0;background: #ffffff;"><input type="hidden" id="anPageName" name="page" value="desktop">
+	<div class="container-center-horizontal">
+		<div class="desktop screen " data-id="1:2">
+			<div class="frame-dg6U5x" data-id="1:3">
+				<div class="rectangle-OxQvKu rectangle" data-id="1:4"></div>
+				<div class="frame-OxQvKu" data-id="1:5"><img class="image-EQHWEP image" data-id="1:6" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="./img/image.svg" alt="IMAGE">
+					<div class="frame-EQHWEP" data-id="1:9">
+						<div class="frame-zLMriT" data-id="1:10">
+							<div class="about-t9LxEh" data-id="1:12">About</div>
+						</div>
+						<div class="home-zLMriT" data-id="1:13">Home</div>
+						<div class="frame-a1q5If" data-id="1:14">
+							<div class="archive-OVaPHY" data-id="1:16">Archive</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="frame-97rk2x" data-id="1:17">
+        <img class="image-CMg9c5 image" data-id="1:18" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="./img/image-1.svg" alt="IMAGE">
+        <div class="frame-CMg9c5" data-id="1:21">
+            <div class="frame-xqGrIx" data-id="1:22">
+              <div class="welcome-to-calm-a-li-9hJjrx" data-id="1:24" style="font-size: 36px;">
+                Welcome to Calm – a lifestyle blog about minimalism, technology, design & travel.
+            </div>
+            
+            </div>
+        </div>
+    </div>
+    
+			<div class="frame-t9gg9N" data-id="1:27">
+				<div class="rectangle-2KmCTY rectangle" data-id="1:28"></div>
+				<div class="frame-2KmCTY" data-id="1:29">
+					<div class="frame-DHMNTA" data-id="1:30">
+						<div class="rectangle-MxkBTE rectangle" data-id="1:31"></div>
+						<div class="frame-MxkBTE" data-id="1:32">
+							<div class="frame-BuEu5Z" data-id="1:33">
+								<div class="rectangle-Z3YHLI rectangle" data-id="1:34"></div>
+								<div class="frame-Z3YHLI" data-id="1:35">
+									<p class="delectus-sint-nisi-u-5yWgPw" data-id="1:37">Delectus sint nisi ut recusandae molestiae. Qui iure accusantium esse temporibus et. Aut atque vel labore officiis a dolor et. Molestiae dolor quo eius. Perferendis error eveniet sit quia occaecati excepturi nisi prod.</p>
+								</div>
+								<h1 class="title-Z3YHLI" data-id="1:38">Travel spots in Iceland</h1>
+								<div class="frame-yAaqho" data-id="1:39">
+									<div class="travel-qHxkM6 poppins-normal-tuatara-12px" data-id="1:41">TRAVEL</div>
+								</div>
+							</div>
+							<div class="november-24-2021-BuEu5Z november-24-2021 roboto-normal-river-bed-11px" data-id="1:42">November 24, 2021</div><img class="image-BuEu5Z image" data-id="1:43" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="./img/image-2.png" alt="IMAGE"></div>
+					</div>
+					<div class="frame-1yJcJ0" data-id="1:44">
+						<div class="rectangle-K45B8I rectangle" data-id="1:45"></div>
+						<div class="frame-K45B8I" data-id="1:46"><img class="image-DS4ZjH image" data-id="1:47" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="./img/image-3@2x.png" alt="IMAGE">
+							<div class="november-24-2021-DS4ZjH november-24-2021 roboto-normal-river-bed-11px" data-id="1:48">November 24, 2021</div>
+							<div class="frame-DS4ZjH" data-id="1:49">
+								<div class="rectangle-cBXA0q rectangle" data-id="1:50"></div>
+								<div class="frame-cBXA0q" data-id="1:51">
+									<div class="exercise-G2xfIc poppins-normal-tuatara-12px" data-id="1:53">EXERCISE</div>
+								</div>
+								<div class="climbing-as-exercise-cBXA0q" data-id="1:54">Climbing as exercise</div>
+							</div>
+						</div>
+					</div>
+					<div class="frame-60oISG" data-id="1:55">
+						<div class="rectangle-CU13ze rectangle" data-id="1:56"></div>
+						<div class="frame-CU13ze" data-id="1:57"><img class="image-BSyk5O image" data-id="1:58" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="./img/image-4@2x.png" alt="IMAGE">
+							<div class="november-24-2021-BSyk5O november-24-2021 roboto-normal-river-bed-11px" data-id="1:59">November 24, 2021</div>
+							<div class="frame-BSyk5O" data-id="1:60">
+								<div class="rectangle-hjewc1 rectangle" data-id="1:61"></div>
+								<div class="frame-hjewc1" data-id="1:62">
+									<div class="tech poppins-normal-tuatara-12px" data-id="1:64">TECH</div>
+								</div>
+								<p class="the-move-to-mirrorless-cameras-hjewc1 roboto-normal-river-bed-18px" data-id="1:65">The move to mirrorless cameras</p>
+							</div>
+						</div>
+					</div>
+					<div class="frame-JsPz2k" data-id="1:66">
+						<div class="rectangle-8HOb9T rectangle" data-id="1:67"></div>
+						<div class="frame-8HOb9T" data-id="1:68"><img class="image-lNuYoy image" data-id="1:69" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="./img/image-5.png" alt="IMAGE">
+							<div class="november-24-2021-lNuYoy november-24-2021 roboto-normal-river-bed-11px" data-id="1:70">November 24, 2021</div>
+							<div class="frame-lNuYoy" data-id="1:71">
+								<div class="rectangle-L10UZB rectangle" data-id="1:72"></div>
+								<div class="frame-L10UZB" data-id="1:73">
+									<div class="tech poppins-normal-tuatara-12px" data-id="1:75">TECH</div>
+								</div>
+								<p class="drone-photography-on-a-space-budget-L10UZB" data-id="1:76">Drone photography on a space budget</p>
+							</div>
+						</div>
+					</div>
+					<div class="frame-u68RmY" data-id="1:77">
+						<div class="rectangle-jr5Abb rectangle" data-id="1:78"></div>
+						<div class="frame-jr5Abb" data-id="1:79"><img class="image-xX7lyb image" data-id="1:80" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="./img/image-6@2x.png" alt="IMAGE">
+							<div class="november-24-2021-xX7lyb november-24-2021 roboto-normal-river-bed-11px" data-id="1:81">November 24, 2021</div>
+							<div class="frame-xX7lyb" data-id="1:82">
+								<div class="rectangle-Zx9kzI rectangle" data-id="1:83"></div>
+								<div class="frame-Zx9kzI" data-id="1:84">
+									<div class="tutorial-6IxzmH poppins-normal-tuatara-12px" data-id="1:86">TUTORIAL</div>
+								</div>
+								<p class="how-to-make-the-perfect-cup-of-coffee-Zx9kzI roboto-normal-river-bed-18px" data-id="1:87">How to make the perfect cup of coffee</p>
+							</div>
+						</div>
+					</div>
+					<div class="frame-qBnz5L" data-id="1:88">
+						<div class="rectangle-Si5S5H rectangle" data-id="1:89"></div>
+						<div class="frame-Si5S5H" data-id="1:90"><img class="image-uI55PZ image" data-id="1:91" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="./img/image-7@2x.png" alt="IMAGE">
+							<div class="frame-uI55PZ" data-id="1:92">
+								<div class="rectangle-ClupXb rectangle" data-id="1:93"></div>
+								<div class="frame-ClupXb" data-id="1:94">
+									<div class="review poppins-normal-tuatara-12px" data-id="1:96">REVIEW</div>
+								</div>
+								<p class="the-best-pen-ive-ever-used-ClupXb" data-id="1:97">The best pen I&#39;ve ever used</p>
+							</div>
+							<div class="november-24-2021-uI55PZ november-24-2021 roboto-normal-river-bed-11px" data-id="1:98">November 24, 2021</div>
+						</div>
+					</div>
+					<div class="frame-tT1jXK" data-id="1:99">
+						<div class="rectangle-igC8gL rectangle" data-id="1:100"></div>
+						<div class="frame-igC8gL" data-id="1:101"><img class="image-Enyxxq image" data-id="1:102" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="./img/image-8@2x.png" alt="IMAGE">
+							<div class="november-24-2021-Enyxxq november-24-2021 roboto-normal-river-bed-11px" data-id="1:103">November 24, 2021</div>
+							<div class="frame-Enyxxq" data-id="1:104">
+								<div class="rectangle-6jk6KK rectangle" data-id="1:105"></div>
+								<div class="frame-6jk6KK" data-id="1:106">
+									<div class="review poppins-normal-tuatara-12px" data-id="1:108">REVIEW</div>
+								</div>
+								<div class="tech-focused-travel-backpack-6jk6KK roboto-normal-river-bed-18px" data-id="1:109">Tech-focused travel backpack</div>
+							</div>
+						</div>
+					</div>
+					<div class="frame-iykY6D" data-id="1:110">
+						<div class="rectangle-FdkJyR rectangle" data-id="1:111"></div>
+						<div class="frame-FdkJyR" data-id="1:112"><img class="image-jaPziB image" data-id="1:113" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" anima-src="./img/image-9@2x.png" alt="IMAGE">
+							<div class="november-24-2021-jaPziB november-24-2021 roboto-normal-river-bed-11px" data-id="1:114">November 24, 2021</div>
+							<div class="frame-jaPziB" data-id="1:115">
+								<div class="rectangle-GP6YZ3 rectangle" data-id="1:116"></div>
+								<div class="frame-GP6YZ3" data-id="1:117">
+									<div class="review poppins-normal-tuatara-12px" data-id="1:119">REVIEW</div>
+								</div>
+								<p class="desk-accessories-to-keep-you-organized-GP6YZ3 roboto-normal-river-bed-18px" data-id="1:120">Desk accessories to keep you organized</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
